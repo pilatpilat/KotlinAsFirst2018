@@ -83,8 +83,7 @@ class Tests {
         assertEquals(102334155, fib(40))
         assertEquals(1134903170, fib(45))
         assertEquals(1836311903, fib(46))
-        // Just to calculate it
-        fib(50)
+        print("Fib 50 : ${fib(50)} ")
     }
 
     @Test
@@ -177,6 +176,8 @@ class Tests {
         assertEquals(0.0, sin(PI, 1e-5), 1e-5)
         assertEquals(-1.0, sin(3.0 * PI / 2.0, 1e-5), 1e-5)
         assertEquals(0.0, sin(100 * PI, 1e-5), 1e-5)
+        assertEquals(0.86602540378, sin(60.0 * PI / 180.0, 1e-5), 1e-5)
+        assertEquals(kotlin.math.sin(0.52359), sin(30.0 * PI / 180.0, 1e-5), 1e-5)
     }
 
     @Test
@@ -187,6 +188,7 @@ class Tests {
         assertEquals(-1.0, cos(PI, 1e-5), 1e-5)
         assertEquals(0.0, cos(3.0 * PI / 2.0, 1e-5), 1e-5)
         assertEquals(1.0, cos(100 * PI, 1e-5), 1e-5)
+        assertEquals(kotlin.math.cos(60.0 * PI / 180.0), cos(60.0 * PI / 180.0, 1e-5), 1e-5)
     }
 
     @Test
@@ -217,6 +219,8 @@ class Tests {
         assertTrue(hasDifferentDigits(222266666))
         assertFalse(hasDifferentDigits(0))
         assertFalse(hasDifferentDigits(777))
+        assertFalse(hasDifferentDigits(6))
+        assertTrue(hasDifferentDigits(Int.MAX_VALUE))
     }
 
     @Test
