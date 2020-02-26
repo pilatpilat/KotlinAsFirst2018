@@ -20,6 +20,10 @@ class Tests {
         assertTrue(isNumberHappy(1533))
         assertTrue(isNumberHappy(9009))
         assertFalse(isNumberHappy(3644))
+        assertTrue(isNumberHappy(110))
+        assertFalse(isNumberHappy(11))
+        assertTrue(isNumberHappy(0))
+        assertFalse(isNumberHappy(11))
     }
 
     @Test
@@ -64,5 +68,42 @@ class Tests {
         assertTrue(brickPasses(4, 4, 4, 4, 4))
         assertFalse(brickPasses(6, 5, 4, 3, 6))
         assertTrue(brickPasses(3, 2, 1, 1, 2))
+    }
+
+    @Test
+    @Tag("Aux")
+    fun powInt() {
+        assertEquals(4, powInt(2, 2))
+        assertEquals(100, powInt(10,2))
+        assertEquals(1, powInt(999, 0))
+        assertEquals(9, powInt(3,2))
+        assertEquals(38416, powInt(14, 4))
+        assertEquals(1000, powInt(10, 3))
+    }
+
+    @Test
+    @Tag("Aux")
+    fun getDigit() {
+        assertEquals(1, getDigit(1, 1))
+        assertEquals(0, getDigit(10, 6))
+        assertEquals(6, getDigit(123456789, 4))
+        assertEquals(0, getDigit(13, -2))
+        assertEquals(0, getDigit(2344, 0))
+        assertEquals(2, getDigit(28335, 5))
+    }
+
+    @Test
+    @Tag("Aux")
+    fun isYearLeap() {
+        assertFalse(isYearLeap(1999))
+        assertTrue(isYearLeap(1600))
+        assertTrue(isYearLeap(2000))
+        assertFalse(isYearLeap(2100))
+        assertFalse(isYearLeap(2100))
+        assertTrue(isYearLeap(2012))
+        assertTrue(isYearLeap(2016))
+        assertFalse(isYearLeap(2018))
+        assertTrue(isYearLeap(1944))
+
     }
 }
