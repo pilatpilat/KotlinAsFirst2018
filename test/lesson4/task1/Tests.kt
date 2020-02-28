@@ -3,6 +3,7 @@ package lesson4.task1
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Disabled
 
 class Tests {
     @Test
@@ -125,6 +126,8 @@ class Tests {
         assertEquals(0.0, times(listOf(), listOf()), 1e-5)
         assertEquals(-5.0, times(listOf(1.0, -4.0), listOf(3.0, 2.0)), 1e-5)
         assertEquals(-19.0, times(listOf(-1.0, 2.0, -3.0), listOf(3.0, -2.0, 4.0)), 1e-5)
+        assertEquals(0.0, times(listOf(), listOf(1.0, 2.3, 4.4)), 1e-5)
+        assertEquals(0.0, times(listOf(2.0, 3.99), listOf(1.0, 2.3, 4.4)), 1e-5)
     }
 
     @Test
@@ -156,12 +159,14 @@ class Tests {
     @Test
     @Tag("Normal")
     fun factorize() {
+        assertEquals(listOf(5), factorize(5))
+        assertEquals(listOf(3), factorize(3))
         assertEquals(listOf(2), factorize(2))
         assertEquals(listOf(3, 5, 5), factorize(75))
         assertEquals(listOf(2, 3, 3, 19), factorize(342))
     }
 
-    @Test
+    @Test// @Disabled
     @Tag("Hard")
     fun factorizeToString() {
         assertEquals("2", factorizeToString(2))

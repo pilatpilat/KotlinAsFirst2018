@@ -3,6 +3,8 @@ package lesson3.task1
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Disabled
+
 import kotlin.math.PI
 
 class Tests {
@@ -100,7 +102,7 @@ class Tests {
         assertEquals(2022222222, lcm(1011111111, 2))
     }
 
-    @Test
+    @Test @Disabled
     @Tag("Easy")
     fun minDivisor() {
         assertEquals(2, minDivisor(2))
@@ -114,7 +116,7 @@ class Tests {
         assertEquals(Int.MAX_VALUE, minDivisor(Int.MAX_VALUE))
     }
 
-    @Test
+    @Test @Disabled
     @Tag("Easy")
     fun maxDivisor() {
         assertEquals(1, maxDivisor(17))
