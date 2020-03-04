@@ -116,7 +116,10 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = TODO()
+fun abs(v: List<Double>): Double {
+    if(v.isEmpty())return 0.0
+    return kotlin.math.sqrt(v.fold(0.0){acc, el->acc + el * el})
+}
 
 /**
  * Простая
@@ -256,7 +259,17 @@ fun convert(n: Int, base: Int): List<Int>{
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val revConverted = convert(n, base)
+    val baseString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase()
+    return revConverted.joinToString(separator = ""){
+        when(it){
+            in 0..9 -> "$it"
+            in 10..35 -> baseString[it - 10].toString()
+            else -> "?"
+        }
+    }
+}
 
 /**
  * Средняя
@@ -265,7 +278,15 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var curMultiplier = 1
+    var res: Int = 0
+    for(i in digits.asReversed()){
+        res += i * curMultiplier
+        curMultiplier *= base
+    }
+    return res
+}
 
 /**
  * Сложная
@@ -276,7 +297,21 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int{
+    var curMultiplier = 1
+    var res: Int = 0
+    var digit:Int
+    for(c in str.reversed()){
+        digit = when(c){
+            in '0'..'9' -> c.toInt() - '0'.toInt()
+            in 'a'..'z' -> c.toInt() - 'a'.toInt() + 10
+            else -> 0
+        }
+        res += digit * curMultiplier
+        curMultiplier *= base
+    }
+    return res
+}
 
 /**
  * Сложная
@@ -288,6 +323,83 @@ fun decimalFromString(str: String, base: Int): Int = TODO()
  */
 fun roman(n: Int): String = TODO()
 
+/*
+* russian100
+* преобразования числа 0-100 в русский текст
+ */
+fun russian100(n: Int): String{
+    if(n == 0) return "ноль"
+    var res = ""
+    val d1 = n % 10
+    val d2 = n % 100 / 10
+    val d3 = n / 100
+    if(d2 == 1) {
+        res = when (d1) {
+            1 -> "одинадцать"
+            2 -> "двенадцать"
+            3 -> "тринадцать"
+            4 -> "четырнадцать"
+            5 -> "пятнадцать"
+            6 -> "шестнадцать"
+            7 -> "семндацать"
+            8 -> "восемнадцать"
+            9 -> "девятнадцать"
+            else -> ""
+        }
+    }
+        else{
+        res = when(d1){
+            1 -> "один"
+            2 -> "два"
+            3 -> "три"
+            4 -> "четыре"
+            5 -> "пять"
+            6 -> "шесть"
+            7 -> "семь"
+            8 -> "восемь"
+            9 -> "девять"
+            else -> ""
+        }
+    }
+    val dec = when(d2)
+    {
+        1 -> if (d1 ==0) "десять" else ""
+        2 -> "двадцать"
+        3 -> "тридцать"
+        4 -> "сорок"
+        5 -> "пятьдесят"
+        6 -> "шестьдесят"
+        7 -> "семьдесят"
+        8 -> "восемьдесят"
+        9 -> "девяносто"
+        else -> ""
+    }
+    if(dec != ""){
+        if(res != "")
+            res = dec + " " + res
+        else
+            res = dec
+    }
+    val hundr = when(d3){
+        1 -> "сто"
+        2 -> "двести"
+        3 -> "триста"
+        4 -> "четыреста"
+        5 -> "пятьсот"
+        6 -> "шестьсот"
+        7 -> "семьсот"
+        8 -> "восемьсот"
+        9 -> "девятьсот"
+        else -> ""
+    }
+    if(hundr != "") {
+        if(res != "")
+            res = hundr + " " + res
+        else
+            res = hundr
+    }
+    return res
+}
 /**
  * Очень сложная
  *
@@ -295,4 +407,14 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var res: String = ""
+    val hundreds = listOf("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот")
+
+    return res
+}
+
+fun main(args: Array<String>) {
+    println("test 4 main")
+    decimalFromString("012abc", 10)
+}

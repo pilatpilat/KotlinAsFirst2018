@@ -238,4 +238,24 @@ class Tests {
         assertEquals("девятьсот тысяч", russian(900000))
         assertEquals("двенадцать", russian(12))
     }
+
+    @Test
+    @Tag("AUX")
+    fun russian100() {
+        assertEquals("ноль", russian100(0))
+        assertEquals("один", russian100(1))
+        assertEquals("два", russian100(2))
+        assertEquals("десять", russian100(10))
+        assertEquals("шестнадцать", russian100(16))
+        assertEquals("пятьдесят", russian100(50))
+        assertEquals("пятьдесят четыре", russian100(54))
+        assertEquals("шестьдесят девять", russian100(69))
+        assertEquals("сто", russian100(100))
+        assertEquals("триста один", russian100(301))
+        assertEquals("двести тринадцать", russian100(213))
+        assertEquals("четыреста сорок четыре", russian100(444))
+        assertEquals("девятьсот девятнадцать", russian100(919))
+        assertEquals("восемьсот семьдесят восемь", russian100(878))
+        assertEquals("шестьсот девяносто", russian100(690))
+    }
 }
