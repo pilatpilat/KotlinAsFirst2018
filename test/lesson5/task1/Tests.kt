@@ -33,6 +33,13 @@ class Tests {
                         mapOf()
                 )
         )
+        assertEquals(
+                200.0,
+                shoppingListCost(
+                        listOf("Хлеб", "Хлеб", "Молоко", "Кефир"),
+                        itemCosts
+                )
+        )
     }
 
     @Test
@@ -141,11 +148,11 @@ class Tests {
         )
         // TODO: Sort the values here or let the students do it?
         assertEquals(
-                mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат")),
+                mapOf(5 to listOf("Семён", "Михаил").sorted(), 3 to listOf("Марат")),
                 buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
         )
         assertEquals(
-                mapOf(3 to listOf("Семён", "Михаил", "Марат")),
+                mapOf(3 to listOf("Семён", "Михаил", "Марат").sorted()),
                 buildGrades(mapOf("Марат" to 3, "Семён" to 3, "Михаил" to 3))
         )
     }
@@ -155,6 +162,10 @@ class Tests {
     fun containsIn() {
         assertTrue(containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")))
         assertFalse(containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")))
+        assertTrue(containsIn(mapOf("a" to "z", "c" to "cc"), mapOf("a" to "z", "b" to "sweet", "c" to "cc")))
+        assertFalse(containsIn(mapOf("a" to "z", "c" to "cc"), mapOf("a" to "z", "b" to "sweet", "c" to "dd")))
+        assertFalse(containsIn(mapOf("a" to "z", "c" to "cc", "d" to "dd"), mapOf("a" to "z", "b" to "sweet", "c" to "dd")))
+        assertFalse(containsIn(mapOf("a" to "z", "c" to "cc"), mapOf("a" to "z", "b" to "sweet", "c" to "dd", "d" to "dd")))
     }
 
     @Test
@@ -239,6 +250,9 @@ class Tests {
         subtractOf(from, mapOf("b" to "z"))
         assertEquals(from, mapOf("a" to "z", "b" to "c"))
 
+        subtractOf(from, mapOf("e" to "z"))
+        assertEquals(from, mapOf("a" to "z", "b" to "c"))
+
         subtractOf(from, mapOf("a" to "z"))
         assertEquals(from, mapOf("b" to "c"))
     }
@@ -258,6 +272,15 @@ class Tests {
                 emptyList<String>(),
                 whoAreInBoth(listOf("Marat", "Mikhail"), listOf("Sveta", "Kirill"))
         )
+        assertEquals(
+                listOf("Marat", "John").sorted(),
+        whoAreInBoth(listOf("Marat", "Mikhail", "John"), listOf("John", "Marat", "Kirill"))
+        )
+
+        assertEquals(
+                listOf("John", "Marat").sorted(),
+                whoAreInBoth(listOf("Marat", "Mikhail", "John"), listOf("John", "Marat", "Kirill"))
+        )
     }
 
     @Test
@@ -266,6 +289,7 @@ class Tests {
         assertFalse(canBuildFrom(emptyList(), "foo"))
         assertTrue(canBuildFrom(listOf('a', 'b', 'o'), "baobab"))
         assertFalse(canBuildFrom(listOf('a', 'm', 'r'), "Marat"))
+        assertTrue(canBuildFrom(listOf('a', 'm', 'r', 't', 'b'), "Marat"))
     }
 
     @Test
@@ -282,6 +306,10 @@ class Tests {
         assertEquals(
                 emptyMap<String, Int>(),
                 extractRepeats(listOf("a", "b", "c"))
+        )
+        assertEquals(
+                mapOf("a" to 4, "c" to 2),
+                extractRepeats(listOf("a", "b", "c", "a", "a", "a", "c"))
         )
     }
 
